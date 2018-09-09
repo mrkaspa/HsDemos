@@ -1,6 +1,8 @@
 module Lib
-  ( someFunc
+  ( mainFunc
   ) where
+
+import Control.Monad
 
 addTail :: Maybe [Int] -> Maybe [Int]
 addTail xs = fmap (mappend [4, 5, 6]) xs
@@ -11,8 +13,16 @@ ops = do
   nums2 <- Just [7, 8, 9]
   return $ mappend nums1 nums2
 
-someFunc :: IO ()
-someFunc =
+readPrintNTimes :: IO ()
+readPrintNTimes = do
+  n <- readLn
+  mapM_ (\_ -> putStrLn "Hello") [0 .. n]
+
+mainFunc :: IO ()
+mainFunc = do
+  putStrLn "N times = "
+  readPrintNTimes
+  putStrLn "Opt lists = "
   case ops of
     Just res -> putStrLn $ "Res " ++ (show res)
     Nothing -> putStrLn "None"
