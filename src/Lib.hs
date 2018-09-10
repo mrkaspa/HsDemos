@@ -24,5 +24,5 @@ mainFunc = do
   putStrLn "N times = "
   readPrintNTimes
   putStrLn "Opt lists = "
-  nums <- return ops
+  nums <- pure ops
   forM_ nums (putStrLn . show)
