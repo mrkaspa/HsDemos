@@ -12,7 +12,7 @@ ops :: Maybe [Int]
 ops = do
   nums1 <- addTail $ Just [1, 2, 3]
   nums2 <- Just [7, 8, 9]
-  return $ mappend nums1 nums2
+  return $ nums1 <> nums2
 
 readPrintNTimes :: IO ()
 readPrintNTimes = do
