@@ -17,7 +17,7 @@ ops = do
 readPrintNTimes :: IO ()
 readPrintNTimes = do
   n <- readLn
-  mapM_ (\_ -> putStrLn "Hello") [0 .. n]
+  forM_ [0 .. n] (\_ -> putStrLn "Hello")
 
 mainFunc :: IO ()
 mainFunc = do
@@ -25,4 +25,4 @@ mainFunc = do
   readPrintNTimes
   putStrLn "Opt lists = "
   nums <- return ops
-  mapM_ (putStrLn . show) nums
+  forM_ nums (putStrLn . show)
