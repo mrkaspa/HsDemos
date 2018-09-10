@@ -22,16 +22,30 @@ description:         Please see the README on GitHub at <https://github.com/gith
 dependencies:
 - base >= 4.7 && < 5
 - mtl >= 2.2.2
+- time >= 1.9.2
+- text >= 1.2.3.0
 
 library:
   source-dirs: src
   dependencies:
   - mtl
+  - time
+  - text
 
 executables:
-  HsDemos-exe:
-    main:                Main.hs
-    source-dirs:         app
+  IOMain-exe:
+    main:                IOMain.hs
+    source-dirs:         app_io
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - HsDemos
+
+  CSVMain-exe:
+    main:                CSVMain.hs
+    source-dirs:         app_csv
     ghc-options:
     - -threaded
     - -rtsopts
