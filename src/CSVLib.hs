@@ -1,6 +1,3 @@
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-
 module CSVLib
   ( text2Quotes
   , QuoteData(..)
@@ -24,7 +21,7 @@ data QuoteData = QuoteData
   , open :: Fixed4
   , high :: Fixed4
   , low :: Fixed4
-  } deriving Show
+  } deriving (Show)
 
 text2Quotes :: T.Text -> [QuoteData]
 text2Quotes = map (mkQuote . toComponents) . tail . T.lines
@@ -33,5 +30,5 @@ text2Quotes = map (mkQuote . toComponents) . tail . T.lines
     mkQuote (d:rest@[_, _, _, _, _]) =
       let day = parseTimeOrError False defaultTimeLocale "%Y/%m/%d" d
           [close, volume, open, high, low] = map read rest
-       in QuoteData {..}
+      in QuoteData {..}
     mkQuote _ = error "Incorrect format"

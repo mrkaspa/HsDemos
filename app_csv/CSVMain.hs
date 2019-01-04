@@ -1,17 +1,14 @@
-{-# LANGUAGE OverloadedStrings #-}
-
 module Main where
 
 import CSVLib
 
 main :: IO ()
-main =
-  putStrLn $ show parseCSV
-
-parseCSV :: [QuoteData]
-parseCSV =
-  text2Quotes
-    "day,close,volume,open,high,low\n\
+main = putStrLn $ show $ (filterByVol . text2Quotes) $ dat
+  where
+    volGt max QuoteData {..} = volume > max
+    filterByVol = filter $ volGt 20000000.0
+    dat =
+      "day,close,volume,open,high,low\n\
     \2017/10/11,156.5500,16861450.0000,155.9700,156.9800,155.7500\n\
     \2017/10/10,155.9000,15603520.0000,156.0550,158.0000,155.1000\n\
     \2017/10/09,155.8400,16243080.0000,155.8100,156.7300,155.4850\n\
