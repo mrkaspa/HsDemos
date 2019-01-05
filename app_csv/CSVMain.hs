@@ -1,9 +1,10 @@
 module Main where
 
 import CSVLib
+import Control.Monad
 
 main :: IO ()
-main = putStrLn $ show $ (filterByVol . text2Quotes) $ dat
+main = prt . filterByVol . text2Quotes $ dat
   where
     volGt max QuoteData {..} = volume > max
     filterByVol = filter $ volGt 20000000.0
@@ -14,3 +15,7 @@ main = putStrLn $ show $ (filterByVol . text2Quotes) $ dat
     \2017/10/09,155.8400,16243080.0000,155.8100,156.7300,155.4850\n\
     \2017/10/06,155.3000,17223790.0000,154.9700,155.4900,154.5600\n\
     \2017/10/05,155.3900,21215870.0000,154.1800,155.4400,154.0500"
+
+prt :: [QuoteData] -> IO ()
+prt rows =
+  forM_ rows (putStrLn . show)

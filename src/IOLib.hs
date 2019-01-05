@@ -3,7 +3,6 @@ module IOLib
   ) where
 
 import Control.Monad
-import Control.Monad.Trans
 
 addTail :: Maybe [Int] -> Maybe [Int]
 addTail xs = fmap (mappend [4, 5, 6]) xs
@@ -24,5 +23,4 @@ mainFunc = do
   putStrLn "N times = "
   readPrintNTimes
   putStrLn "Opt lists = "
-  nums <- pure ops
-  forM_ nums (putStrLn . show)
+  forM_ ops (putStrLn . show)
